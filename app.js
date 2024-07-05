@@ -1,0 +1,36 @@
+var mar = 0;
+var interval;
+var car = document.getElementById("img");
+var startButton = document.getElementById("startButton");
+var stopButton = document.getElementById("stopButton");
+var screenWidth = window.innerWidth;
+var carWidth = car.offsetWidth;
+var cardistancefromend = 17; // Distance between car and screen edge
+
+function move() {
+    if (mar >= screenWidth - carWidth - cardistancefromend) { // Stop before the screen edge with some distance
+        stop();
+        mar = 0;
+    } else {
+        mar += 5;
+        car.style.marginLeft = mar + "px";
+    }
+}
+
+function start() {
+    interval = setInterval(move, 100);
+    startButton.disabled = true;
+    stopButton.disabled = false;
+}
+
+function stop() {
+    clearInterval(interval);
+    startButton.disabled = false;
+    stopButton.disabled = true;
+}
+
+// Responsive adjustments
+window.addEventListener("resize", function () {
+    screenWidth = window.innerWidth;
+    carWidth = car.offsetWidth;
+});
